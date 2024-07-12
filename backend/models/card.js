@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose');
 const regExpLink = /^(https?:\/\/)(www\.)?[\w~:/?%#[\]@!$&'.()*+,;=]*\/#?/;
 
-const cardSchema = mongoose.Schema({
+const cardSchema = new mongoose.Schema({
   name:{
     type: String,
     require: true,

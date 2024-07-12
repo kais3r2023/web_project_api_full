@@ -27,6 +27,7 @@ function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [emailUser, setEmailUser] = useState("");
   const navigate = useNavigate();
+  const [token, setToken] = useState(null);
 
   //Llamada de datos de Usuario de la Api
   useEffect(() => {
@@ -38,13 +39,15 @@ function App() {
   // Funcion que atrapa el Token('jwt') del localStorage 
 
   useEffect(()=>{
-    if(localStorage.getItem('jwt')){
+    const storedToken = localStorage.getItem('jwt');
+    if(storedToken){
       auth 
-        .getToken(localStorage.getItem('jwt'))
+        .getToken(storedToken)
         .then((data)=>{
             if(data){
               setIsLogged(true);
               setEmailUser(data.email);
+              setToken(storedToken);
               navigate('/')
             } else{
               navigate('/signup')
@@ -62,7 +65,8 @@ function App() {
 
   function signOff(){
     localStorage.removeItem('jwt')
-    setEmailUser("")    
+    setEmailUser("")
+    setToken(null);    
   }
 
   //Handler states Array de Cards

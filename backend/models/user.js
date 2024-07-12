@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 
-const userSchema = mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -37,23 +37,20 @@ const userSchema = mongoose.Schema(
           return validator.isEmail(value);
         },
         message: (props) => {
-          return `${props.value} no es un email valido.`;
+          return `${props.value} no es un email válido.`;
         },
       },
     },
     password: {
       type: String,
-      require: true,
+      required: true,
       select: false, // Select: false sirve para evitar que se muestre
     },
   },
   { versionKey: false }
 );
 
-userSchema.statics.findUserByCredentials = function findUserByCredentials(
-  email,
-  password
-) {
+userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email })
     .select("+password")
     .then((user) => {
@@ -61,26 +58,18 @@ userSchema.statics.findUserByCredentials = function findUserByCredentials(
         return Promise.reject(
           new Error("El usuario o contraseña son incorrectos")
         );
-      } else {
-        return bcrypt.compare(password, user.password).then((matched) => {
-          if (!matched) {
-            return Promise.reject(
-              new Error("El usuario o contraseña son incorrectos")
-            );
-          } else {
-            return user;
-          }
-        });
       }
-    })
-
-    .catch((error) => {
-      return Promise.reject(
-        new Error("El usuario o contraseña son incorrectos")
-      );
+      return bcrypt.compare(password, user.password).then((matched) => {
+        if (!matched) {
+          return Promise.reject(
+            new Error("El usuario o contraseña son incorrectos")
+          );
+        }
+        return user;
+      });
     });
 };
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("User", userSchema);
 
-module.exports = {User};
+module.exports = { User };

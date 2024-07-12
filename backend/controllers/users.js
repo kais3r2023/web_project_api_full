@@ -96,3 +96,8 @@ module.exports.updateAvatar = (req, res) => {
       res.status(NOT_FOUND_CODE).json({ message: error.message });
     });
 };
+
+module.exports.getUserProfile = (req, res)=>{
+  const{ user } = req;
+  res.json({user});
+}
