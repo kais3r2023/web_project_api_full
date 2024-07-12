@@ -1,0 +1,17 @@
+.gallery__card_trash-can-icon{
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    
+}
+
+.gallery__card_trash-can-icon:hover{
+    opacity: 0.5;
+}
+
+.gallery__card_trash-can-icon_hidden{
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    display: none;
+}

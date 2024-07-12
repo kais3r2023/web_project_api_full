@@ -1,0 +1,4 @@
+.template-zoom__container{
+    position: absolute;
+    z-index: 4;
+}

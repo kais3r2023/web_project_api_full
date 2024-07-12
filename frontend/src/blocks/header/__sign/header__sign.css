@@ -1,0 +1,18 @@
+.header__sign {
+  align-self: center;
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  line-height: 22px;
+  margin-left: 23px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  justify-self: right;
+  
+}
+
+.header__sign:hover {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+}

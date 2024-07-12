@@ -1,0 +1,9 @@
+.gallery__card{
+    position: relative;
+    max-width: 282px;
+    height: 361px;
+    border-radius: 10px;
+    background-color: #ffff;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}

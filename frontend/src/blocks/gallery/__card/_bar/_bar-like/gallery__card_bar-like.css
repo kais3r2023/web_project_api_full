@@ -1,0 +1,22 @@
+.gallery__card_bar-like{
+    height: 19px;
+    position: relative;
+    display: flex;
+    margin: auto;
+}
+.gallery__card_bar-like:hover{
+    opacity: 0.5;
+}
+
+.black-like{
+    background-image: url("/src/images/black-like.png");
+}
+
+.gallery__card_bar-like-count{
+    color:black;
+    display: flex;
+    font: 13px;
+    font-weight: 400;
+    justify-content: center;
+    line-height: 20px;
+}

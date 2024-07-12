@@ -1,0 +1,24 @@
+.formulary__data-error {
+  margin-bottom: 0;
+  border-bottom: 1px solid red;
+  padding: 10px 0 0;
+}
+
+.formulary__data-error_active,
+.name-profile-error,
+.about-me-error,
+.photo-avatar-error,
+.photo-link-error,
+.place-title-error {
+  margin: 0;
+  width: 80%;
+  padding: 10px 0 0;
+  margin-bottom: 10px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+  text-align: center;
+}

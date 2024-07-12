@@ -1,0 +1,19 @@
+.formulary__save-button{
+    width: 358px;
+    height: 50.15px;
+    background: #000000;
+    border-radius: 2px;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.formulary__save-button:hover{
+    opacity: 0.8;
+}
+
+.formulary__save-button:disabled{
+    opacity: 0.2;
+    pointer-events: none;
+}

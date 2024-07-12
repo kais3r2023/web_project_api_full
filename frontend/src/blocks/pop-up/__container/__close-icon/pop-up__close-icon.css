@@ -1,0 +1,8 @@
+.pop-up__close-icon{
+    position: absolute;
+    top: -35px;
+    right: -30px;
+}
+.pop-up__close-icon:hover{
+    opacity: 0.6;
+}

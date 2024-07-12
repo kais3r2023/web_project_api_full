@@ -1,0 +1,9 @@
+.infoTool__btn-close{
+  position: absolute;
+  top: -35px;
+  right: -30px;
+}
+
+.infoTool__btn-close:hover{
+  opacity: 0.6;
+}

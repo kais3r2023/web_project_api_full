@@ -1,0 +1,40 @@
+.profile__avatar{
+    width: 168px;
+    height: 168px;
+    object-fit: cover;
+    z-index: 1;
+    border-radius: 50%;
+    grid-column-start: 1;
+    grid-row-start: 1;
+    background-position: center;
+    background-size: cover;
+    color: transparent;
+}
+
+.profile__avatar-overlay{
+    width: 168px;
+    height: 168px;
+    background-color: rgba(0,0,0,0);
+    z-index: 2;
+    border-radius: 50%;
+    grid-column-start: 1;
+    grid-row-start: 1;
+
+}
+
+.profile__avatar-overlay:hover{
+    background-color: rgba(0,0,0,0.7);
+    background-image: url("/src/images/updateProfileIcon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 3;
+    cursor: pointer;
+}
+
+#avatarContent{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    place-content: center;
+}
+

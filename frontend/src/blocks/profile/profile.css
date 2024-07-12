@@ -1,0 +1,9 @@
+.profile{
+    display: grid;
+    grid-template-columns: 168px 1fr 150px;
+    place-content: center;
+    position: relative;
+    margin-top: 36px;
+    justify-content: space-around;
+    grid-column-gap: 1vw;
+}

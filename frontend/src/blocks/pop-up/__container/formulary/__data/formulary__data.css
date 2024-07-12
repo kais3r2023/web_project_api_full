@@ -1,0 +1,19 @@
+.formulary__data{
+    width: 358px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    margin-bottom: 10px;
+    outline: none;
+}
+
+.formulary__data:invalid{
+    border-bottom: 1px solid red;
+}
+
+.formulary__data:valid {
+    border-bottom: 1px solid green;
+}

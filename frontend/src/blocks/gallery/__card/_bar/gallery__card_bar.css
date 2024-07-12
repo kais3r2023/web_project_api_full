@@ -1,0 +1,9 @@
+.gallery__card_bar{
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-self: center;
+    width: 246px;
+    padding-left: 5px;
+    padding-right: 5px;
+}

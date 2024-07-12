@@ -1,0 +1,9 @@
+.template-zoom__close-icon{
+    position: absolute;
+    top: -35px;
+    right: -33px;
+}
+
+.template-zoom__close-icon:hover{
+    opacity: 0.6;
+}
