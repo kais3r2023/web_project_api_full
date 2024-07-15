@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 const User = require("../models/user");
 const {InvalidError, NotAuthorization, ServerError, NotFoundError} = require("../middleware/errors");
 const jwt = require("jsonwebtoken");
