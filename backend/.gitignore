@@ -5,7 +5,7 @@ npm-debug.log*
 
 # Directorio de dependencias
 node_modules
-.env
+
 
 # Directorio de cache npm opcional
 .npm
@@ -14,3 +14,4 @@ node_modules
 .DS_Store
 .idea
 .vscode
+.env

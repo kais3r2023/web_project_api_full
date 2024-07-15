@@ -1,10 +1,9 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
-const ERROR_CODE = 400;
-const NOT_FOUND_CODE = 404;
-const SERVER_ERROR_CODE = 500;
+const {InvalidError, NotAuthorization, ServerError, NotFoundError} = require("../middleware/errors");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const {NODE_ENV, JWT_SECRET} = process.env;
 
 
 module.exports.login = (req, res, next) => {
@@ -23,30 +22,26 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.getAllUsers = (req, res) => {
+module.exports.getAllUsers = (req, res, next) => {
   User.find()
     .orFail()
     .then((users) => {
       res.send(users);
     })
-    .catch((error) => {
-      res.status(SERVER_ERROR_CODE).json({ message: error.message });
-    });
+    .catch(next);
 };
 
-module.exports.getUser = (req, res) => {
+module.exports.getUser = (req, res, next) => {
   const userId = req.params.id;
   User.findById(userId)
     .orFail()
     .then((user) => {
       res.send({ data: user });
     })
-    .catch((error) => {
-      res.status(NOT_FOUND_CODE).json({ message: error.message });
-    });
+    .catch(next);
 };
 
-module.exports.createUser = (req, res) => {
+module.exports.createUser = (req, res, next) => {
   const { name, about, avatar, email } = req.body;
 
   User.findOne({ email })
@@ -66,12 +61,10 @@ module.exports.createUser = (req, res) => {
       res.send({ data: user });
     })
 
-    .catch((error) => {
-      res.status(ERROR_CODE).json({ message: error.message });
-    });
+    .catch(next);
 };
 
-module.exports.updateProfile = (req, res) => {
+module.exports.updateProfile = (req, res, next) => {
   const { name, about } = req.body;
   const userId = req.user._id;
   User.findByIdAndUpdate(userId, { name, about }, { new: true })
@@ -79,12 +72,10 @@ module.exports.updateProfile = (req, res) => {
     .then((user) => {
       res.send({ data: user });
     })
-    .catch((error) => {
-      res.status(NOT_FOUND_CODE).json({ message: error.message });
-    });
+    .catch(next);
 };
 
-module.exports.updateAvatar = (req, res) => {
+module.exports.updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
   const userId = req.user._id;
   User.findByIdAndUpdate(userId, { avatar }, { new: true, runValidators: true })
@@ -92,9 +83,7 @@ module.exports.updateAvatar = (req, res) => {
     .then((user) => {
       res.send({ data: user });
     })
-    .catch((error) => {
-      res.status(NOT_FOUND_CODE).json({ message: error.message });
-    });
+    .catch(next);
 };
 
 module.exports.getUserProfile = (req, res)=>{
