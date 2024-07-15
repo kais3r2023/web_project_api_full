@@ -26,6 +26,7 @@ app.use(requestLogger);
 app.post('/signin', login);
 app.post('/signup', createUser);
 
+
 //Rutas protegidas
 app.use('/users', jwtMiddleware, users);
 app.use('/cards', jwtMiddleware, cards);

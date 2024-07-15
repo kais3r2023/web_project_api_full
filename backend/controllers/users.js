@@ -23,8 +23,13 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.getAllUsers = (req, res, next) => {
-  User.find()
-    .orFail()
+  const userId = req.user._id;
+  if (!userId) {
+    throw new Error(
+      "No tienes autorización para acceder a esta contenido"
+    );
+  }
+  User.find({})
     .then((users) => {
       res.send(users);
     })
