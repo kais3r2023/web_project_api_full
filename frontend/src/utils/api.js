@@ -68,7 +68,12 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://api.kais3r.chickenkiller.com"
+  baseUrl: "https://api.kais3r.chickenkiller.com",
+  headers: {
+    "Access-Control-Allow-Origin" : "*",
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+  }
 });
 
 
