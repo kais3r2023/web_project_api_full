@@ -9,7 +9,7 @@ const { jwtMiddleware } = require("./middleware/auth");
 const { requestLogger, errorLogger } = require("./middleware/logger");
 const { errors } = require("celebrate");
 const cors = require("cors");
-const whiteList = ["http://kais3r.chickenkiller.com", "http://localhost:3000"];
+const whiteList = ["http://kais3r.chickenkiller.com", "http://localhost:3000", "api.kais3r.chickenkiller.com"];
 
 mongoose.connect(url);
 
