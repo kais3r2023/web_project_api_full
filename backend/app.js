@@ -9,7 +9,6 @@ const { jwtMiddleware } = require("./middleware/auth");
 const { requestLogger, errorLogger } = require("./middleware/logger");
 const { errors } = require("celebrate");
 const cors = require("cors");
-const whiteList = ["http://kais3r.chickenkiller.com", "http://localhost:3000", "api.kais3r.chickenkiller.com"];
 
 mongoose.connect(url);
 
@@ -22,7 +21,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Cors
 app.use(
   cors({
-    origin: whiteList,
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
   })
 );
 
