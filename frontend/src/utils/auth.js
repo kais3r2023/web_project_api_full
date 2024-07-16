@@ -1,4 +1,4 @@
-const baseUrl = 'https://tripleten.desarrollointerno.com';
+const baseUrl = 'https://kais3r.chickenkiller.com';
 
 export const register = (email, password)=>{
   return fetch(`${baseUrl}/signup`,{

@@ -68,11 +68,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/web_es_07",
-  headers: {
-    authorization: "b0317f83-ed7a-474d-ada0-9509ec577796",
-    "Content-Type": "application/json",
-  },
+  baseUrl: "https://api.kais3r.chickenkiller.com"
 });
 
 
