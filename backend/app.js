@@ -10,6 +10,7 @@ const { requestLogger, errorLogger } = require("./middleware/logger");
 const {errors} = require("celebrate")
 
 
+
 mongoose.connect(url)
 
 
@@ -19,6 +20,11 @@ const { PORT = 3000 } = process.env;
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
 
+var cors = require('cors');
+
+// Cors
+app.use(cors());
+app.options('*', cors());
 
 
 
