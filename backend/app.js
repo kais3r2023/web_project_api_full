@@ -8,6 +8,7 @@ const url = 'mongodb://localhost:27017/aroundb';
 const { jwtMiddleware } = require('./middleware/auth');
 const { requestLogger, errorLogger } = require("./middleware/logger");
 const {errors} = require("celebrate")
+const whiteList = [ 'https://kais3r.chickenkiller.com', 'http://localhost:3000'];
 
 
 
@@ -23,7 +24,14 @@ app.use(bodyParser.urlencoded({ extended: true }))
 var cors = require('cors');
 
 // Cors
-app.use(cors());
+app.use(
+  cors({
+    origin: whiteList,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 200,
+  })
+);
 app.options('*', cors());
 
 
