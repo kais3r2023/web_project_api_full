@@ -10,7 +10,9 @@ const { jwtMiddleware } = require("../middleware/auth");
 const { celebrate, Joi } = require("celebrate");
 const {validateURL} = require("../middleware/validator")
 
+
 const router = express.Router();
+
 
 router.use(jwtMiddleware);
 

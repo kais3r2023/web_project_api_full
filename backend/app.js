@@ -19,14 +19,8 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Cors
-const corsOptions = {
-  origin: '*', // Allow all origins
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
-  credentials: true // Allow credentials if needed
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
+app.options('*', cors());
 
 app.use(requestLogger);
 app.post("/signin", login);
