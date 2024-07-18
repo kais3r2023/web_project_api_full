@@ -55,7 +55,9 @@ export const getToken = (token)=>{
       Authorization: `Bearer ${token}`
     }
   })
-    .then((res)=>{return res.json()})
+    .then((res)=>{
+      console.log("respuesta de la solicitud GetToken auth utils backend", res)
+      return (res.json())})
     .then((data)=>{
       return data
     })

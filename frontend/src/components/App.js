@@ -40,10 +40,12 @@ function App() {
 
   useEffect(()=>{
     const storedToken = localStorage.getItem('jwt');
+    console.log("token trapado para useEffect desde localStorage",storedToken)
     if(storedToken){
       auth 
         .getToken(storedToken)
         .then((data)=>{
+          console.log("data de GetToken en App", data)
             if(data){
               setIsLogged(true);
               setEmailUser(data.email);
