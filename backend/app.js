@@ -13,7 +13,7 @@ const cors = require("cors");
 mongoose.connect(url);
 
 const app = express();
-const { PORT = 3000 } = process.env;
+const { PORT = 8001 } = process.env;
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }));

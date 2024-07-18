@@ -1,4 +1,6 @@
-const baseUrl = 'https://kais3r.chickenkiller.com';
+/* const baseUrl = 'https://kais3r.chickenkiller.com'; */
+
+const baseUrl = 'http://localhost:8001';
 
 export const register = (email, password)=>{
   return fetch(`${baseUrl}/signup`,{
