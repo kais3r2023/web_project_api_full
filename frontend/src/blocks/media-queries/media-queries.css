@@ -6,7 +6,8 @@
         justify-items: center;
     }
     .header__sign{
-        justify-self: center;
+        justify-self: right;
+        margin-left: 0;
     }
 
     .profile{
@@ -63,6 +64,10 @@
     .page{
         width: 80vw;
         margin-top: 28px;
+    }
+
+    .header__sign{
+        justify-self: center;
     }
 
     .header__logo{

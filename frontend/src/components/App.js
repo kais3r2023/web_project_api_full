@@ -12,8 +12,7 @@ import AddPlacePopup from "./AddPlacePopup";
 import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
-import *as auth from "../utils/auth"
-
+import * as auth from "../utils/auth";
 
 function App() {
   // Carga de States
@@ -29,54 +28,56 @@ function App() {
   const navigate = useNavigate();
   const [token, setToken] = useState(null);
 
-  //Llamada de datos de Usuario de la Api
+  //Llamada de datos de Usuario de la Api al estate de CurrentUser
   useEffect(() => {
-    api.defaultProfile().then((fetchedUser) => {
-      setCurrentUser(fetchedUser);
-    });
-  }, []);
-
-  // Funcion que atrapa el Token('jwt') del localStorage 
-
-  useEffect(()=>{
-    const storedToken = localStorage.getItem('jwt');
-    console.log("token trapado para useEffect desde localStorage",storedToken)
-    if(storedToken){
-      auth 
-        .getToken(storedToken)
-        .then((data)=>{
-          console.log("data de GetToken en App", data)
-            if(data){
-              setIsLogged(true);
-              setEmailUser(data.email);
-              setToken(storedToken);
-              navigate('/')
-            } else{
-              navigate('/signup')
-              throw new Error('Token invalido')
-            }
-        })
-        .catch((error)=>{
-          console.log(error);
-          navigate('/signup')
-        })
+    if (isLogged) {
+      api.defaultProfile().then((fetchedUser) => {
+        setCurrentUser(fetchedUser);
+      });
     }
-  },[isLogged, navigate]);
+  }, [isLogged]);
+
+  // Funcion que atrapa y Gestiona el Usuario por medio del Token('jwt') del localStorage
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("jwt");
+    if (storedToken) {
+      auth
+        .getUserById(storedToken)
+        .then((data) => {
+          if (data) {
+            setIsLogged(true);
+            setEmailUser(data.email);
+            setToken(storedToken);
+            navigate("/");
+          } else {
+            navigate("/signup");
+            throw new Error("Token invalido");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          navigate("/signup");
+        });
+    }
+  }, [isLogged, navigate]);
 
   // Funcion de Cerrar sesion
 
-  function signOff(){
-    localStorage.removeItem('jwt')
-    setEmailUser("")
-    setToken(null);    
+  function signOff() {
+    localStorage.removeItem("jwt");
+    setEmailUser("");
+    setToken(null);
   }
 
   //Handler states Array de Cards
   useEffect(() => {
-    api.getCards().then((arrayApiCards) => {
-      setCards(arrayApiCards);
-    });
-  }, []);
+    if (isLogged) {
+      api.getCards().then((arrayApiCards) => {
+        setCards(arrayApiCards);
+      });
+    }
+  }, [isLogged]);
 
   // Funciones para cambiar los States de Popups
   function handleEditAvatarClick() {
@@ -122,14 +123,14 @@ function App() {
   }
 
   //Funcion para cambiar el estado de la aplicacion a Logueado
-  function handleLogin(){
-    setIsLogged(true)
+  function handleLogin() {
+    setIsLogged(true);
   }
 
   // Funcion para controlar los likes y dislikes
   function handleCardLike(card) {
     // verificacion si la tarjeta ha sido dado like
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     //Peticion a la API para obtener datos actualizados de la tarjeta
 
@@ -168,26 +169,29 @@ function App() {
                     signText={"Cerrar sesión"}
                     emailLogin={emailUser}
                     onClick={signOff}
-                    routeLink={'/signin'}
+                    routeLink={"/signin"}
                   />
-                  <Main
-                    onEditProfileClick={handleEditProfileClick}
-                    onAddPlaceClick={handleAddPlaceClick}
-                    onEditAvatarClick={handleEditAvatarClick}
-                    onConfirmationClick={handleConfirmationClick}
-                    onCardClick={handlerCardClick}
-                    onCardLike={handleCardLike}
-                    onCardDelete={handleCardDelete}
-                    isOpen={[
-                      isEditProfilePopupOpen,
-                      isAddPlacePopupOpen,
-                      isEditAvatarPopupOpen,
-                      isConfirmationPopupOpen,
-                    ]}
-                    onClose={closeAllPopups}
-                    selectedCard={selectedCard}
-                    cards={cards}
-                  />
+                  {currentUser && (
+                    <Main
+                      onEditProfileClick={handleEditProfileClick}
+                      onAddPlaceClick={handleAddPlaceClick}
+                      onEditAvatarClick={handleEditAvatarClick}
+                      onConfirmationClick={handleConfirmationClick}
+                      onCardClick={handlerCardClick}
+                      onCardLike={handleCardLike}
+                      onCardDelete={handleCardDelete}
+                      isOpen={[
+                        isEditProfilePopupOpen,
+                        isAddPlacePopupOpen,
+                        isEditAvatarPopupOpen,
+                        isConfirmationPopupOpen,
+                      ]}
+                      onClose={closeAllPopups}
+                      selectedCard={selectedCard}
+                      cards={cards}
+                    />
+                  )}
+
                   <EditAvatarPopup
                     isOpen={isEditAvatarPopupOpen}
                     onClose={closeAllPopups}
@@ -211,13 +215,8 @@ function App() {
             path="/signin"
             element={
               <>
-                <Header 
-                signText={"Regístrate"} 
-                routeLink={"/signup"}
-                />
-                <Login 
-                  isUserLogged={handleLogin}
-                />
+                <Header signText={"Regístrate"} routeLink={"/signup"} />
+                <Login isUserLogged={handleLogin} />
               </>
             }
           />
@@ -225,10 +224,7 @@ function App() {
             path="/signup"
             element={
               <>
-                <Header 
-                signText={"Inicia Sesión"}
-                routeLink={"/signin"}
-                />
+                <Header signText={"Inicia Sesión"} routeLink={"/signin"} />
                 <Register />
               </>
             }

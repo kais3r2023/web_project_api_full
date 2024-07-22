@@ -37,8 +37,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   //Despues de cargar el usuario actual desde la API sus datos serán usados en componentes gestionados.
 
   useEffect(() => {
-    setName(currentUser.name);
-    setAbout(currentUser.about);
+
+    if(currentUser.name !== undefined || currentUser.about !== undefined){
+      setName(currentUser.name || '');
+      setAbout(currentUser.about || '');
+    }    
   }, [currentUser]);
 
 

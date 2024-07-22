@@ -8,18 +8,15 @@ const {NODE_ENV, JWT_SECRET} = process.env;
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-
   return User.findUserByCredentials(email, password)
     .then((user) => {
-
       const token = jwt.sign(
         { _id: user._id },
-          JWT_SECRET,
+        NODE_ENV === "production" ? JWT_SECRET : "dev-secret",
         {
           expiresIn: "7d",
         }
       );
-      console.log("token ya creado de Login backend", token)
       res.send({ token });
     })
     .catch(next);
@@ -44,7 +41,7 @@ module.exports.getUser = (req, res, next) => {
   User.findById(userId)
     .orFail()
     .then((user) => {
-      res.send({ data: user });
+      res.send({ user });
     })
     .catch(next);
 };
@@ -66,7 +63,7 @@ module.exports.createUser = (req, res, next) => {
     })
 
     .then((user) => {
-      res.send({ data: user });
+      res.send({user});
     })
 
     .catch(next);
@@ -78,7 +75,7 @@ module.exports.updateProfile = (req, res, next) => {
   User.findByIdAndUpdate(userId, { name, about }, { new: true })
     .orFail()
     .then((user) => {
-      res.send({ data: user });
+      res.send(user);
     })
     .catch(next);
 };
@@ -88,14 +85,21 @@ module.exports.updateAvatar = (req, res, next) => {
   const userId = req.user._id;
   User.findByIdAndUpdate(userId, { avatar }, { new: true, runValidators: true })
     .orFail()
-    .then((user) => {
-      res.send({ data: user });
+    .then((avatar) => {
+      res.send(avatar);
     })
     .catch(next);
 };
 
 module.exports.getUserProfile = (req, res)=>{
-  const{ user } = req.body;
-  console.log("getUserProfile controller users backend", user)
-  res.json({user});
+  User.findById(req.user._id)
+  .then((user) => {
+    if (!user) {
+      return next(new NotFoundError('Usuario no encontrado'));
+    }
+    res.json(user);
+  })
+  .catch((error) => {
+    next(error);
+  });
 }

@@ -47,7 +47,7 @@ export const authorize = (email, password) =>{
   })
 };
 
-export const getToken = (token)=>{
+export const getUserById = (token)=>{
   return fetch(`${baseUrl}/users/me`,{
     method: "GET",
     headers: {
@@ -56,7 +56,6 @@ export const getToken = (token)=>{
     }
   })
     .then((res)=>{
-      console.log("respuesta de la solicitud GetToken auth utils backend", res)
       return (res.json())})
     .then((data)=>{
       return data

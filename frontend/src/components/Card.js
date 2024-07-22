@@ -8,7 +8,7 @@ function Card({card, name, link, likes, onCardClick, onCardLike, onCardDelete })
 
   //Verificando si el id de la tarjeta es la del propietario
 
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
 
   // Variable para establecer ClassName si se muestra el icono de eliminar tarjeta
 
@@ -18,7 +18,8 @@ function Card({card, name, link, likes, onCardClick, onCardLike, onCardDelete })
 
   
   // Verificacion si el usuario a dado Like a la tarjeta
-  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const isLiked = card.likes.some((i) => i === currentUser._id);
+  console.log("isLiked para saber ha dado like", isLiked)
 
   // Variable para Establecer ClassName si se ha dado like
   const cardLikeButtonClassName = isLiked? 'black-like' : '';

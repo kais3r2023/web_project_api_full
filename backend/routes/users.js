@@ -6,7 +6,6 @@ const {
   updateAvatar,
   getUserProfile,
 } = require("../controllers/users");
-const { jwtMiddleware } = require("../middleware/auth");
 const { celebrate, Joi } = require("celebrate");
 const {validateURL} = require("../middleware/validator")
 
@@ -14,11 +13,11 @@ const {validateURL} = require("../middleware/validator")
 const router = express.Router();
 
 
-router.use(jwtMiddleware);
+
 
 router.get("/", getAllUsers);
-router.get("/:id", getUser);
 router.get("/me", getUserProfile);
+router.get("/:id", getUser);
 router.patch(
   "/me",
   celebrate({

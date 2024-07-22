@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+require('dotenv').config();
 const users = require("./routes/users");
 const cards = require("./routes/cards");
 const { login, createUser } = require("./controllers/users");
@@ -9,6 +10,7 @@ const { jwtMiddleware } = require("./middleware/auth");
 const { requestLogger, errorLogger } = require("./middleware/logger");
 const { errors } = require("celebrate");
 const cors = require("cors");
+
 
 mongoose.connect(url);
 
