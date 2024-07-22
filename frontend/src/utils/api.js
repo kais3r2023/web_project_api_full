@@ -80,9 +80,9 @@ class Api {
   }
 }
 
-/* const baseUrl = 'https://kais3r.chickenkiller.com'; */
+const baseUrl = 'https://kais3r.chickenkiller.com';
 
-const baseUrl = 'http://localhost:8001';
+/* const baseUrl = 'http://localhost:8001'; */
 
 const api = new Api({
   baseUrl: baseUrl,
